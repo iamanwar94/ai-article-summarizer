@@ -59,6 +59,16 @@ const Demo = () => {
     }
   };
 
+  const handlePaste = async () => {
+    console.log("loading => handlePaste clicked");
+    try {
+      const clipboardData = await navigator.clipboard.readText();
+      setArticle({ ...article, url: clipboardData });
+    } catch (error) {
+      console.error("Failed to read clipboard data:", error);
+    }
+  };
+
   return (
     <section className="mt-16 w-full max-w-xl">
       {/* Search */}
@@ -71,6 +81,7 @@ const Demo = () => {
             src={linkIcon}
             alt="link-icon"
             className="absolute left-0 my-2 ml-3 w-5"
+            onClick={() => handlePaste()}
           />
 
           <input
